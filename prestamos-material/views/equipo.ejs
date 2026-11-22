@@ -1,0 +1,62 @@
+<%# Vista del detalle de un equipo (GET /equipos/:id). Estos comentarios no aparecen en el HTML final. %>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Equipo <%= equipo.codigo %></title>
+</head>
+<body>
+  <main>
+    <h1><%= equipo.nombre %></h1>
+
+    <%# Datos del equipo. Solo se muestra "Prestado a" cuando existe un préstamo activo (usuario_actual). %>
+    <dl>
+      <dt>Código</dt>
+      <dd><%= equipo.codigo %></dd>
+      <dt>Categoría</dt>
+      <dd><%= equipo.categoria %></dd>
+      <dt>Estado</dt>
+      <dd><%= equipo.disponible ? 'Disponible' : 'Prestado' %></dd>
+      <% if (equipo.usuario_actual) { %>
+        <dt>Prestado a</dt>
+        <dd><%= equipo.usuario_actual %></dd>
+      <% } %>
+    </dl>
+
+    <%# Historial de préstamos. Si no hay ninguno se muestra un mensaje; si hay, una tabla. %>
+    <h2>Historial de préstamos</h2>
+    <% if (equipo.historial.length === 0) { %>
+      <p>Este equipo no tiene préstamos registrados.</p>
+    <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Fecha de préstamo</th>
+            <th>Fecha de devolución</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%# Una fila por préstamo. Las fechas se formatean en español; si fecha_devolucion es NULL
+              el préstamo sigue activo y se muestra "Pendiente". %>
+          <% for (const p of equipo.historial) { %>
+            <tr>
+              <td><%= p.usuario %></td>
+              <td><%= new Date(p.fecha_prestamo).toLocaleString('es-ES') %></td>
+              <td>
+                <%= p.fecha_devolucion
+                  ? new Date(p.fecha_devolucion).toLocaleString('es-ES')
+                  : 'Pendiente' %>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    <% } %>
+
+    <%# Enlace para volver al listado. %>
+    <p><a href="/equipos">Volver al listado</a></p>
+  </main>
+</body>
+</html>

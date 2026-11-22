@@ -1,0 +1,77 @@
+<%# Vista del listado de equipos (GET /equipos). Estos comentarios no aparecen en el HTML final. %>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Equipos</title>
+</head>
+<body>
+  <main>
+    <h1>Equipos</h1>
+
+    <%# Formulario GET: envía q, categoria, disponible y orden por la URL.
+        Cada campo recupera el valor elegido (filtros) para que los filtros se mantengan tras buscar.
+        La etiqueta de salida escapa el HTML de los valores, evitando inyección de código en la página. %>
+    <form action="/equipos" method="get">
+      <label>Nombre
+        <input name="q" value="<%= filtros.q %>" maxlength="80">
+      </label>
+      <label>Categoría
+        <input name="categoria" value="<%= filtros.categoria %>" maxlength="50">
+      </label>
+      <%# Selector de disponibilidad: marca "selected" en la opción que coincide con el filtro actual. %>
+      <label>Disponibilidad
+        <select name="disponible">
+          <option value="" <%= filtros.disponible === '' ? 'selected' : '' %>>Todos</option>
+          <option value="true" <%= filtros.disponible === 'true' ? 'selected' : '' %>>Disponible</option>
+          <option value="false" <%= filtros.disponible === 'false' ? 'selected' : '' %>>Prestado</option>
+        </select>
+      </label>
+      <%# Selector de orden: solo ofrece las dos opciones predefinidas (código o nombre). %>
+      <label>Orden
+        <select name="orden">
+          <option value="codigo" <%= filtros.orden === 'codigo' ? 'selected' : '' %>>Código</option>
+          <option value="nombre" <%= filtros.orden === 'nombre' ? 'selected' : '' %>>Nombre</option>
+        </select>
+      </label>
+      <button type="submit">Buscar</button>
+    </form>
+
+    <%# Si no hay equipos en esta página se muestra un mensaje claro; si los hay, se dibuja la tabla. %>
+    <% if (equipos.length === 0) { %>
+      <p>No hay equipos que coincidan con los filtros en esta página.</p>
+    <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%# Una fila por equipo. El código enlaza al detalle (/equipos/:id). El estado se traduce del booleano. %>
+          <% for (const e of equipos) { %>
+            <tr>
+              <td><a href="/equipos/<%= e.id %>"><%= e.codigo %></a></td>
+              <td><%= e.nombre %></td>
+              <td><%= e.categoria %></td>
+              <td><%= e.disponible ? 'Disponible' : 'Prestado' %></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    <% } %>
+
+    <%# Paginación: los enlaces anterior/siguiente ya vienen construidos con los filtros conservados.
+        Solo se muestran cuando existen. %>
+    <nav aria-label="Paginación">
+      <% if (anterior) { %><a href="<%= anterior %>">Anterior</a><% } %>
+      <span>Página <%= filtros.pagina %></span>
+      <% if (siguiente) { %><a href="<%= siguiente %>">Siguiente</a><% } %>
+    </nav>
+  </main>
+</body>
+</html>

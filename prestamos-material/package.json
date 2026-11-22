@@ -1,0 +1,16 @@
+{
+  "name": "practica-prestamos",
+  "version": "1.0.0",
+  "description": "Gestión de préstamos de material informático con Express y PostgreSQL",
+  "type": "module",
+  "main": "src/server.mjs",
+  "scripts": {
+    "start": "node --env-file=.env src/server.mjs",
+    "test": "node probar.mjs"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.0.0",
+    "pg": "^8.13.0"
+  }
+}
