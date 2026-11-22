@@ -4,7 +4,8 @@ Práctica evaluable de **Desarrollo Web en Entorno Servidor (2.º DAW)**.
 Aplicación web con Node.js, Express 5 y PostgreSQL que mantiene el inventario de equipos de un centro educativo y permite realizar préstamos y devoluciones sin perder la coherencia de los datos.
 
 **Autor:** David Delgado Alonso
-Chat IA: https://claude.ai/share/38924bad-4313-4812-b477-1b27060fdb1b
+
+**Chat IA:** https://claude.ai/share/38924bad-4313-4812-b477-1b27060fdb1b
 
 ## Requisitos
 
