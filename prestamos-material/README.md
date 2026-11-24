@@ -198,3 +198,16 @@ El script imprime una línea `OK`/`FALLO` por caso con el resultado esperado y e
 - No se incluyen tests automatizados con framework; la comprobación se hace con `probar.mjs`.
 - El filtro de categoría es una coincidencia exacta y distingue mayúsculas de minúsculas.
 - Los comodines `%` y `_` de la búsqueda por nombre conservan su significado de patrón.
+
+
+PORT=3000
+
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=tu_contraseña
+DB_NAME=prestamos
+
+.env
+!.env.example
+.DS_Store
