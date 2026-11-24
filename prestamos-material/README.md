@@ -200,15 +200,22 @@ El script imprime una línea `OK`/`FALLO` por caso con el resultado esperado y e
 - Los comodines `%` y `_` de la búsqueda por nombre conservan su significado de patrón.
 
 
+DB_ADMIN_PASSWORD=admin
+
+PGHOST=127.0.0.1
+
+PGPORT=15432
+
+PGDATABASE=dwes
+
+PGUSER=dwes_app
+
+PGPASSWORD=dwes_pass
+
 PORT=3000
 
-DB_ADMIN_PASSWORD=admin
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=tu_contraseña
-DB_NAME=prestamos
-
 .env
+
 !.env.example
+
 .DS_Store
