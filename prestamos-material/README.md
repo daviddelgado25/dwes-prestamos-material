@@ -202,9 +202,10 @@ El script imprime una línea `OK`/`FALLO` por caso con el resultado esperado y e
 
 PORT=3000
 
+DB_ADMIN_PASSWORD=admin
 DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
+DB_PORT=5432
+DB_USER=postgres
 DB_PASSWORD=tu_contraseña
 DB_NAME=prestamos
 
